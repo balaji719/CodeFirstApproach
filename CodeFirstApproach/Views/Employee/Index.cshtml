@@ -1,0 +1,52 @@
+﻿@model CodeFirstApproach.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Add", "Employee", FormMethod.Post))
+{
+
+    @Html.Label("Enter Eno")
+    @Html.TextBoxFor(model => model.Eno)
+    <br />
+    @Html.Label("Enter Ename")
+    @Html.TextBoxFor(model => model.Ename)
+    <br />
+    @Html.Label("Enter Salary")
+    @Html.TextBoxFor(model => model.Esalary)
+    <br />
+    @Html.Label("Enter Designation")
+    @Html.TextBoxFor(model => model.Designation)
+    <br />
+    <input type="submit" value="Save" name="b1" />
+    <input type="submit" value="Update" name="b1" />
+    <br />
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Eno</td>
+            <td>Ename</td>
+            <td>ESalary</td>
+            <td>Designation</td>
+            <td>Delete</td>
+            <td>Edit</td>
+        </tr>
+        @foreach (var item in TempData["ie"] as IEnumerable<CodeFirstApproach.Models.Employee>)
+        {
+            <tr >
+                <td>@item.Id</td>
+                <td>@item.Eno</td>
+                <td>@item.Ename</td>
+                <td>@item.Esalary</td>
+                <td>@item.Designation</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = @item.Eno })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = @item.Eno })</td>
+            </tr>
+        }
+    </table>
+}
+
+
